@@ -1,47 +1,121 @@
+:root {
+  --bg: #f4f6f8;
+  --card: #ffffff;
+  --text: #333;
+  --muted: #999;
+  --primary: #667eea;
+  --item: #f9f9fb;
+}
+
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #f1f1f1;
+  --muted: #aaa;
+  --primary: #8b9cff;
+  --item: #2a2a2a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: var(--bg);
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  align-items: center;
+  transition: background 0.3s;
 }
 
-.container {
-  background: #fff;
-  padding: 20px;
-  width: 350px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.app {
+  background: var(--card);
+  width: 100%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  transition: background 0.3s;
 }
 
-h1 {
-  text-align: center;
-}
-
-.form {
-  display: flex;
-  gap: 10px;
-}
-
-input {
-  flex: 1;
-  padding: 8px;
-}
-
-button {
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-li {
-  list-style: none;
-  margin-top: 10px;
+.top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
-.concluido {
+.top h1 {
+  color: var(--text);
+}
+
+#toggleTheme {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.input-area button {
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--item);
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-left span {
+  color: var(--text);
+}
+
+.todo-left span.concluido {
   text-decoration: line-through;
-  color: gray;
+  color: var(--muted);
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
 }

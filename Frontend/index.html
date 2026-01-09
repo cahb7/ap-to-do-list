@@ -2,22 +2,40 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>To-Do List</title>
+
+  <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="container">
-    <h1>📝 To-Do List</h1>
+  <main class="app">
+    <!-- TOPO / HEADER -->
+    <header class="top">
+      <h1>📝 Minhas Tarefas</h1>
+      <button id="toggleTheme" title="Alternar tema">🌙</button>
+    </header>
 
-    <div class="form">
-      <input id="titulo" placeholder="Nova tarefa..." />
-      <button onclick="criarTodo()">Adicionar</button>
-    </div>
+    <!-- INPUT -->
+    <section class="input-area">
+      <input 
+        id="titulo" 
+        type="text" 
+        placeholder="Digite uma nova tarefa..." 
+        autocomplete="off"
+      />
+      <button id="btnAdicionar">Adicionar</button>
 
-    <ul id="lista"></ul>
-  </div>
+    </section>
 
+    <!-- LISTA -->
+    <ul id="lista" class="todo-list">
+      <!-- tarefas entram aqui via JS -->
+    </ul>
+  </main>
+
+  <!-- SCRIPT -->
   <script src="script copy.js"></script>
 </body>
 </html>

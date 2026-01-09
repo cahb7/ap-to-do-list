@@ -1,7 +1,13 @@
 console.log('SCRIPT CARREGADO');
 
+/* ======================
+   ELEMENTOS
+====================== */
 const API = '/todos';
 const lista = document.getElementById('lista');
+const input = document.getElementById('titulo');
+const btnAdicionar = document.getElementById('btnAdicionar');
+const btnTheme = document.getElementById('toggleTheme');
 
 /* ======================
    LISTAR TODOS
@@ -14,33 +20,30 @@ async function carregarTodos() {
 
   todos.forEach(todo => {
     const li = document.createElement('li');
+    li.className = 'todo-item';
 
-    const todoDiv = document.createElement('div');
-    todoDiv.className = 'todo';
+    const left = document.createElement('div');
+    left.className = 'todo-left';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = todo.concluido;
-    checkbox.onchange = () => toggleConcluido(todo);
+    checkbox.addEventListener('change', () => toggleConcluido(todo));
 
     const span = document.createElement('span');
     span.textContent = todo.titulo;
     if (todo.concluido) span.classList.add('concluido');
 
-    todoDiv.appendChild(checkbox);
-    todoDiv.appendChild(span);
-
-    const actions = document.createElement('div');
-    actions.className = 'actions';
+    left.appendChild(checkbox);
+    left.appendChild(span);
 
     const btnDelete = document.createElement('button');
+    btnDelete.className = 'delete-btn';
     btnDelete.textContent = '🗑';
-    btnDelete.onclick = () => deletarTodo(todo.id);
+    btnDelete.addEventListener('click', () => deletarTodo(todo.id));
 
-    actions.appendChild(btnDelete);
-
-    li.appendChild(todoDiv);
-    li.appendChild(actions);
+    li.appendChild(left);
+    li.appendChild(btnDelete);
 
     lista.appendChild(li);
   });
@@ -50,9 +53,7 @@ async function carregarTodos() {
    CRIAR TODO
 ====================== */
 async function criarTodo() {
-  const input = document.getElementById('titulo');
   const titulo = input.value.trim();
-
   if (!titulo) return;
 
   await fetch(API, {
@@ -66,7 +67,7 @@ async function criarTodo() {
 }
 
 /* ======================
-   MARCAR / DESMARCAR
+   TOGGLE CONCLUÍDO
 ====================== */
 async function toggleConcluido(todo) {
   await fetch(`${API}/${todo.id}`, {
@@ -85,19 +86,29 @@ async function toggleConcluido(todo) {
    DELETAR
 ====================== */
 async function deletarTodo(id) {
-  await fetch(`${API}/${id}`, {
-    method: 'DELETE'
-  });
-
+  await fetch(`${API}/${id}`, { method: 'DELETE' });
   carregarTodos();
 }
 
 /* ======================
-   EXPOE FUNÇÕES GLOBAIS
+   DARK MODE
 ====================== */
-window.criarTodo = criarTodo;
+const isDark = localStorage.getItem('theme') === 'dark';
 
-/* ======================
-   INICIALIZA
-====================== */
+if (isDark) {
+  document.body.classList.add('dark');
+  btnTheme.textContent = '☀️';
+}
+
+btnTheme.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const ativo = document.body.classList.contains('dark');
+  localStorage.setItem('theme', ativo ? 'dark' : 'light');
+  btnTheme.textContent = ativo ? '☀️' : '🌙';
+});
+
+
+btnAdicionar.addEventListener('click', criarTodo);
+
+
 carregarTodos();
