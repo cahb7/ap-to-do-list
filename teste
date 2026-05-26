@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="app">
+    <!-- TOPO / HEADER -->
+    <header class="top">
+      <h1>📝 Minhas Tarefas</h1>
+      <button id="toggleTheme" title="Alternar tema">🌙</button>
+    </header>
+
+    <!-- INPUT -->
+    <section class="input-area">
+      <input 
+        id="titulo" 
+        type="text" 
+        placeholder="Digite uma nova tarefa..." 
+        autocomplete="off"
+      />
+      <button id="btnAdicionar">Adicionar</button>
+
+    </section>
+
+    <!-- LISTA -->
+    <ul id="lista" class="todo-list">
+      <!-- tarefas entram aqui via JS -->
+    </ul>
+  </main>
+
+  <!-- SCRIPT -->
+  <script src="script copy.js"></script>
+</body>
+</html>
